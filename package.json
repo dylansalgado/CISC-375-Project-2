@@ -3,17 +3,21 @@
     "version": "0.0.0",
     "description": "Dynamic Web Server using Node JS",
     "author": {
-        "name": "",
-        "email": ""
+        "name": "Dylan Salgado",
+        "email": "salg3421@stthomas.edu"
     },
     "contributors": [
         {
-            "name": "",
-            "email": ""
+            "name": "Abeney Ayana",
+            "email": "ayan3842@stthomas.edu"
         },
         {
-            "name": "",
-            "email": ""
+            "name": "Duran Carlson",
+            "email": "duran.carlson@stthomas.edu"
+        },
+        {
+            "name": "Dylan Salgado",
+            "email": "salg3421@stthomas.edu"
         }
     ],
     "main": "server.js",
