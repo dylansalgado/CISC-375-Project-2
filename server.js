@@ -39,7 +39,7 @@ app.get('/year/:selected_year', (req, res) => {
         // modify `template` and send response
         // this will require a query to the SQL database
 
-        res.status(200).type('html').send(template); // <-- you may need to change this
+        res.status(200).type('html').send(year); // <-- you may need to change this
     });
 });
 
@@ -50,7 +50,7 @@ app.get('/state/:selected_state', (req, res) => {
         // modify `template` and send response
         // this will require a query to the SQL database
 
-        res.status(200).type('html').send(template); // <-- you may need to change this
+        res.status(200).type('html').send(state); // <-- you may need to change this
     });
 });
 
@@ -61,7 +61,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
         // modify `template` and send response
         // this will require a query to the SQL database
 
-        res.status(200).type('html').send(template); // <-- you may need to change this
+        res.status(200).type('html').send(energy); // <-- you may need to change this
     });
 });
 
