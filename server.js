@@ -38,8 +38,24 @@ app.get('/year/:selected_year', (req, res) => {
     fs.readFile(path.join(template_dir, 'year.html'), (err, template) => {
         // modify `template` and send response
         // this will require a query to the SQL database
+        // let sql = "SELECT * FROM consumption WHERE year = ?";
 
-        res.status(200).type('html').send(year); // <-- you may need to change this
+        // let data = db.all(sql, [req.params.id], (err, rows) => {
+        //     if (err) {
+        //         throw err;
+        //     }
+        //     rows.forEach((row) => {
+        //         console.log(row.state_abbreviation);
+        //     });
+        // });
+
+        let data = db.all("SELECT * FROM Consumption WHERE year = ?", [req.params.selected_year]); 
+        console.log(data.length);
+        // for (var i = 0; i < data.size; i++){
+        //     console.log(data[i]);
+        // }
+        res.status(200).type('html').send(data); // <-- you may need to change this
+       // console.log(data);
     });
 });
 
@@ -49,8 +65,8 @@ app.get('/state/:selected_state', (req, res) => {
     fs.readFile(path.join(template_dir, 'state.html'), (err, template) => {
         // modify `template` and send response
         // this will require a query to the SQL database
-
-        res.status(200).type('html').send(state); // <-- you may need to change this
+        let data = db.all("SELECT * FROM consumption WHERE state_abbreviation = ?", [req.params.selected_state]); 
+        res.status(200).type('html').send(data); // <-- you may need to change this
     });
 });
 
