@@ -38,24 +38,20 @@ app.get('/year/:selected_year', (req, res) => {
     fs.readFile(path.join(template_dir, 'year.html'), (err, template) => {
         // modify `template` and send response
         // this will require a query to the SQL database
-        // let sql = "SELECT * FROM consumption WHERE year = ?";
-
-        // let data = db.all(sql, [req.params.id], (err, rows) => {
-        //     if (err) {
-        //         throw err;
-        //     }
-        //     rows.forEach((row) => {
-        //         console.log(row.state_abbreviation);
-        //     });
-        // });
-
-        let data = db.all("SELECT * FROM Consumption WHERE year = ?", [req.params.selected_year]); 
-        console.log(data.length);
-        // for (var i = 0; i < data.size; i++){
-        //     console.log(data[i]);
-        // }
-        res.status(200).type('html').send(data); // <-- you may need to change this
-       // console.log(data);
+    
+        db.all("SELECT * FROM Consumption WHERE year = ?", [req.params.selected_year], (err, rows) => {
+            //console.log(rows); // rows is an array with the result of the query
+            if(err){
+                res.status(404).type("plain");
+                res.write("Error executing SQL query");
+                res.end();
+            }
+            else{
+                res.status(200).type('html').send(rows);
+                console.log("success reading");
+                res.end();
+            }
+        });
     });
 });
 
@@ -65,8 +61,19 @@ app.get('/state/:selected_state', (req, res) => {
     fs.readFile(path.join(template_dir, 'state.html'), (err, template) => {
         // modify `template` and send response
         // this will require a query to the SQL database
-        let data = db.all("SELECT * FROM consumption WHERE state_abbreviation = ?", [req.params.selected_state]); 
-        res.status(200).type('html').send(data); // <-- you may need to change this
+        db.all("SELECT * FROM consumption WHERE state_abbreviation = ?", [req.params.selected_state], (err, rows) => {
+            //console.log(rows); // rows is an array with the result of the query
+            if(err){
+                res.status(404).type("plain");
+                res.write("Error executing SQL query");
+                res.end();
+            }
+            else{
+                res.status(200).type('html').send(rows);
+                console.log("success reading");
+                res.end();
+            }
+        });
     });
 });
 
