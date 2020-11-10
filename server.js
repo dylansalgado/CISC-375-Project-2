@@ -69,6 +69,44 @@ app.get('/year/:selected_year', (req, res) => {
                 finalRes = finalRes.replace('var petroleum_count', 'var petroleum_count = ' + total_petroleum_count);
                 finalRes = finalRes.replace('var renewable_count', 'var renewable_count = ' + total_renewable_count);
                 finalRes = finalRes.replace('var year', 'var year = ' + year);
+                finalRes = finalRes.replace('<h1> year </h1>', '<h1>' + year + '</h1>');
+
+                for (let i = 0; i < rows.length; i++) {
+                    var count = 0;
+                    for ([key, value] of Object.entries(rows[i])) {
+                        //console.log(key, value);
+                        if(key == "state_abbreviation"){
+                            finalRes = finalRes.replace('S'+i, value );
+                        }
+
+                        if(key == "coal"){
+                            finalRes = finalRes.replace('C'+i, value );
+                            count = count + value;
+                        }
+
+                        if(key == "natural_gas"){
+                            finalRes = finalRes.replace('NA'+i, value );
+                            count = count + value;
+                        }
+
+                        if(key == "nuclear"){
+                            finalRes = finalRes.replace('NU'+i, value );
+                            count = count + value;
+                        }
+
+                        if(key == "petroleum"){
+                            finalRes = finalRes.replace('P'+i, value );
+                            count = count + value;
+                        }
+
+                        if(key == "renewable"){
+                            finalRes = finalRes.replace('R'+i, value );
+                            count = count + value;
+                        }
+                    }
+                    finalRes = finalRes.replace('T'+i, count );
+                }
+
                 res.write(finalRes);
                 res.end();
             }
