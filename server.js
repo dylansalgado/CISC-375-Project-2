@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 // GET request handler for '/year/*'
 app.get('/year/:selected_year', (req, res) => {
     console.log(req.params.selected_year);
-    fs.readFile(path.join(template_dir, 'year.html'), (err, template) => {
+    fs.readFile(path.join(template_dir, 'year.html'),'utf-8' ,(err, data) => {
         // modify `template` and send response
         // this will require a query to the SQL database
     
@@ -47,8 +47,29 @@ app.get('/year/:selected_year', (req, res) => {
                 res.end();
             }
             else{
-                res.status(200).type('html').send(rows);
-                console.log("success reading");
+                //console.log("success reading");
+                res.status(200).type('html');
+                let total_coal = 0;
+                let total_natural_gas = 0;
+                let total_nuclear_count = 0;
+                let total_petroleum_count = 0;
+                let total_renewable_count = 0;
+                let year = req.params.selected_year;
+
+                for (let i = 0; i < rows.length; i++) {
+                    total_coal = total_coal + rows[i].coal;
+                    total_natural_gas = total_natural_gas + rows[i].natural_gas;
+                    total_nuclear_count = total_nuclear_count + rows[i].nuclear;
+                    total_petroleum_count = total_petroleum_count + rows[i].petroleum;
+                    total_renewable_count = total_renewable_count + rows[i].renewable;
+                }
+                let finalRes = data.replace('var coal_count', 'var coal_count = ' + total_coal);
+                finalRes = finalRes.replace('var natural_gas_count', 'var natural_gas_count = ' + total_natural_gas);
+                finalRes = finalRes.replace('var nuclear_count', 'var nuclear_count = ' + total_nuclear_count);
+                finalRes = finalRes.replace('var petroleum_count', 'var petroleum_count = ' + total_petroleum_count);
+                finalRes = finalRes.replace('var renewable_count', 'var renewable_count = ' + total_renewable_count);
+                finalRes = finalRes.replace('var year', 'var year = ' + year);
+                res.write(finalRes);
                 res.end();
             }
         });
