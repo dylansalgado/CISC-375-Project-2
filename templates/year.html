@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html id="top">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>US Energy Consumption By Year</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>US Energy Consumption</title>
+    <link rel="stylesheet" href="/css/style.css">
     <script type="application/javascript">
         // `year` and total counts for entire US => set these variables equal to appropriate value
         //   * these variables will be defined and accessible from any script loaded after this one
@@ -15,9 +15,14 @@
         var petroleum_count;
         var renewable_count;
     </script>
+    <script type="application/javascript" src="/scripts/navigate.js"></script>
 </head>
-<body>
+<body id="borderbox" >
     <h1> year </h1>
+    <div class="topnav">
+        <button id="previous" type="button">Previous</button>
+        <button id="next" type="button">Next</button>
+    </div>
     <table>
         <thead>
             <tr>
@@ -37,6 +42,7 @@
                 <td>NA0</td>
                 <td>NU0</td>
                 <td>P0</td>
+                <td>R0</td>
                 <td>T0</td>
             </tr>
             <tr>
@@ -45,6 +51,7 @@
                 <td>NA1</td>
                 <td>NU1</td>
                 <td>P1</td>
+                <td>R1</td>
                 <td>T1</td>
             </tr>
             <tr>
@@ -53,6 +60,7 @@
                 <td>NA2</td>
                 <td>NU2</td>
                 <td>P2</td>
+                <td>R2</td>
                 <td>T2</td>
             </tr>
             <tr>
@@ -61,6 +69,7 @@
                 <td>NA3</td>
                 <td>NU3</td>
                 <td>P3</td>
+                <td>R3</td>
                 <td>T3</td>
             </tr>
             <tr>
@@ -69,6 +78,7 @@
                 <td>NA4</td>
                 <td>NU4</td>
                 <td>P4</td>
+                <td>R4</td>
                 <td>T4</td>
             </tr>
             <tr>
@@ -77,6 +87,7 @@
                 <td>NA5</td>
                 <td>NU5</td>
                 <td>P5</td>
+                <td>R5</td>
                 <td>T5</td>
             </tr>
             <tr>
@@ -85,6 +96,7 @@
                 <td>NA6</td>
                 <td>NU6</td>
                 <td>P6</td>
+                <td>R6</td>
                 <td>T6</td>
             </tr>
             <tr>
@@ -93,6 +105,7 @@
                 <td>NA7</td>
                 <td>NU7</td>
                 <td>P7</td>
+                <td>R7</td>
                 <td>T7</td>
             </tr>
             <tr>
@@ -101,6 +114,7 @@
                 <td>NA8</td>
                 <td>NU8</td>
                 <td>P8</td>
+                <td>R8</td>
                 <td>T8</td>
             </tr>
             <tr>
@@ -109,6 +123,7 @@
                 <td>NA9</td>
                 <td>NU9</td>
                 <td>P9</td>
+                <td>R9</td>
                 <td>T9</td>
             </tr>
             <tr>
@@ -117,6 +132,7 @@
                 <td>NA10</td>
                 <td>NU10</td>
                 <td>P10</td>
+                <td>R10</td>
                 <td>T10</td>
             </tr>
              <!---------------------------------------------------->
@@ -128,6 +144,7 @@
                 <td>NA11</td>
                 <td>NU11</td>
                 <td>P11</td>
+                <td>R11</td>
                 <td>T11</td>
             </tr>
             <tr>
@@ -136,6 +153,7 @@
                 <td>NA12</td>
                 <td>NU12</td>
                 <td>P12</td>
+                <td>R12</td>
                 <td>T12</td>
             </tr>
             <tr>
@@ -144,6 +162,7 @@
                 <td>NA13</td>
                 <td>NU13</td>
                 <td>P13</td>
+                <td>R13</td>
                 <td>T13</td>
             </tr>
             <tr>
@@ -152,6 +171,7 @@
                 <td>NA14</td>
                 <td>NU14</td>
                 <td>P14</td>
+                <td>R14</td>
                 <td>T14</td>
             </tr>
             <tr>
@@ -160,6 +180,7 @@
                 <td>NA15</td>
                 <td>NU15</td>
                 <td>P15</td>
+                <td>R15</td>
                 <td>T15</td>
             </tr>
             <tr>
@@ -168,6 +189,7 @@
                 <td>NA16</td>
                 <td>NU16</td>
                 <td>P16</td>
+                <td>R16</td>
                 <td>T16</td>
             </tr>
             <tr>
@@ -176,6 +198,7 @@
                 <td>NA17</td>
                 <td>NU17</td>
                 <td>P17</td>
+                <td>R17</td>
                 <td>T17</td>
             </tr>
             <tr>
@@ -184,6 +207,7 @@
                 <td>NA18</td>
                 <td>NU18</td>
                 <td>P18</td>
+                <td>R18</td>
                 <td>T18</td>
             </tr>
             <tr>
@@ -192,6 +216,7 @@
                 <td>NA19</td>
                 <td>NU19</td>
                 <td>P19</td>
+                <td>R19</td>
                 <td>T19</td>
             </tr>
             <tr>
@@ -200,6 +225,7 @@
                 <td>NA20</td>
                 <td>NU20</td>
                 <td>P20</td>
+                <td>R20</td>
                 <td>T20</td>
             </tr>
              <!---------------------------------------------------->
@@ -211,6 +237,7 @@
                 <td>NA21</td>
                 <td>NU21</td>
                 <td>P21</td>
+                <td>R21</td>
                 <td>T21</td>
             </tr>
             <tr>
@@ -219,6 +246,7 @@
                 <td>NA22</td>
                 <td>NU22</td>
                 <td>P22</td>
+                <td>R22</td>
                 <td>T22</td>
             </tr>
             <tr>
@@ -227,6 +255,7 @@
                 <td>NA23</td>
                 <td>NU23</td>
                 <td>P23</td>
+                <td>R23</td>
                 <td>T23</td>
             </tr>
             <tr>
@@ -235,6 +264,7 @@
                 <td>NA24</td>
                 <td>NU24</td>
                 <td>P24</td>
+                <td>R24</td>
                 <td>T24</td>
             </tr>
             <tr>
@@ -243,6 +273,7 @@
                 <td>NA25</td>
                 <td>NU25</td>
                 <td>P25</td>
+                <td>R25</td>
                 <td>T25</td>
             </tr>
             <tr>
@@ -251,6 +282,7 @@
                 <td>NA26</td>
                 <td>NU26</td>
                 <td>P26</td>
+                <td>R26</td>
                 <td>T26</td>
             </tr>
             <tr>
@@ -259,6 +291,7 @@
                 <td>NA27</td>
                 <td>NU27</td>
                 <td>P27</td>
+                <td>R27</td>
                 <td>T27</td>
             </tr>
             <tr>
@@ -267,6 +300,7 @@
                 <td>NA28</td>
                 <td>NU28</td>
                 <td>P28</td>
+                <td>R28</td>
                 <td>T28</td>
             </tr>
             <tr>
@@ -275,6 +309,7 @@
                 <td>NA29</td>
                 <td>NU29</td>
                 <td>P29</td>
+                <td>R29</td>
                 <td>T29</td>
             </tr>
             <tr>
@@ -283,6 +318,7 @@
                 <td>NA30</td>
                 <td>NU30</td>
                 <td>P30</td>
+                <td>R30</td>
                 <td>T30</td>
             </tr>
              <!---------------------------------------------------->
@@ -294,6 +330,7 @@
                 <td>NA31</td>
                 <td>NU31</td>
                 <td>P31</td>
+                <td>R31</td>
                 <td>T31</td>
             </tr>
             <tr>
@@ -302,6 +339,7 @@
                 <td>NA32</td>
                 <td>NU32</td>
                 <td>P32</td>
+                <td>R32</td>
                 <td>T32</td>
             </tr>
             <tr>
@@ -310,6 +348,7 @@
                 <td>NA33</td>
                 <td>NU33</td>
                 <td>P33</td>
+                <td>R33</td>
                 <td>T33</td>
             </tr>
             <tr>
@@ -318,6 +357,7 @@
                 <td>NA34</td>
                 <td>NU34</td>
                 <td>P34</td>
+                <td>R34</td>
                 <td>T34</td>
             </tr>
             <tr>
@@ -326,6 +366,7 @@
                 <td>NA35</td>
                 <td>NU35</td>
                 <td>P35</td>
+                <td>R35</td>
                 <td>T35</td>
             </tr>
             <tr>
@@ -334,6 +375,7 @@
                 <td>NA36</td>
                 <td>NU36</td>
                 <td>P36</td>
+                <td>R36</td>
                 <td>T36</td>
             </tr>
             <tr>
@@ -342,6 +384,7 @@
                 <td>NA37</td>
                 <td>NU37</td>
                 <td>P37</td>
+                <td>R37</td>
                 <td>T37</td>
             </tr>
             <tr>
@@ -350,6 +393,7 @@
                 <td>NA38</td>
                 <td>NU38</td>
                 <td>P38</td>
+                <td>R38</td>
                 <td>T38</td>
             </tr>
             <tr>
@@ -358,6 +402,7 @@
                 <td>NA39</td>
                 <td>NU39</td>
                 <td>P39</td>
+                <td>R39</td>
                 <td>T39</td>
             </tr>
             <tr>
@@ -366,6 +411,7 @@
                 <td>NA40</td>
                 <td>NU40</td>
                 <td>P40</td>
+                <td>R40</td>
                 <td>T40</td>
             </tr>
              <!---------------------------------------------------->
@@ -377,6 +423,7 @@
                 <td>NA41</td>
                 <td>NU41</td>
                 <td>P41</td>
+                <td>R41</td>
                 <td>T41</td>
             </tr>
             <tr>
@@ -385,6 +432,7 @@
                 <td>NA42</td>
                 <td>NU42</td>
                 <td>P42</td>
+                <td>R42</td>
                 <td>T42</td>
             </tr>
             <tr>
@@ -393,6 +441,7 @@
                 <td>NA43</td>
                 <td>NU43</td>
                 <td>P43</td>
+                <td>R43</td>
                 <td>T43</td>
             </tr>
             <tr>
@@ -401,6 +450,7 @@
                 <td>NA44</td>
                 <td>NU44</td>
                 <td>P44</td>
+                <td>R44</td>
                 <td>T44</td>
             </tr>
             <tr>
@@ -409,6 +459,7 @@
                 <td>NA45</td>
                 <td>NU45</td>
                 <td>P45</td>
+                <td>R45</td>
                 <td>T45</td>
             </tr>
             <tr>
@@ -417,6 +468,7 @@
                 <td>NA46</td>
                 <td>NU46</td>
                 <td>P46</td>
+                <td>R46</td>
                 <td>T46</td>
             </tr>
             <tr>
@@ -425,6 +477,7 @@
                 <td>NA47</td>
                 <td>NU47</td>
                 <td>P47</td>
+                <td>R47</td>
                 <td>T47</td>
             </tr>
             <tr>
@@ -433,6 +486,7 @@
                 <td>NA48</td>
                 <td>NU48</td>
                 <td>P48</td>
+                <td>R48</td>
                 <td>T48</td>
             </tr>
             <tr>
@@ -441,6 +495,7 @@
                 <td>NA49</td>
                 <td>NU49</td>
                 <td>P49</td>
+                <td>R49</td>
                 <td>T49</td>
             </tr>
             <tr>
@@ -449,6 +504,7 @@
                 <td>NA50</td>
                 <td>NU50</td>
                 <td>P50</td>
+                <td>R50</td>
                 <td>T50</td>
             </tr>
              <!---------------------------------------------------->
@@ -457,7 +513,14 @@
              
         </tbody>
     </table>
-    <canvas id="myChart"></canvas>
+<br/>
+<br/>
+<br/>
+    <div id = "example2" class="chart-container" >
+        <canvas id="myChart"></canvas>
+    </div>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -467,19 +530,25 @@
 
         // The data for our dataset
         data: {
-        labels: ['Coal','Natural Gas', 'Nuclear', 'Petroleum', 'Renewable'],
+        labels: ['Coal','Natural Gas', 'Nuclear', 'Petroleun', 'Renewable'],
         datasets: [{
             label: 'Totals of energy consumption',
-            backgroundColor: 'rgb(0, 99, 132)',
-            borderColor: 'rgb(0, 99, 132)',
+            backgroundColor: 'rgb(0, 0, 0)',
+            borderColor: 'rgb(0, 0, 0)',
             data: [coal_count, natural_gas_count, nuclear_count, petroleum_count, renewable_count]
         }]
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+        responsive:true,
+        maintainAspectRatio: true
+    }
 });
     </script>
+<br/>
+<h2>
+    <a href="#top">Jump to top of page</a>
+</h2>
 </body>
 </html>
-
