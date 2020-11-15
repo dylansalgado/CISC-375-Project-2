@@ -116,7 +116,7 @@ app.get('/year/:selected_year', (req, res) => {
 
 // GET request handler for '/state/*'
 app.get('/state/:selected_state', (req, res) => {
-    console.log(req.params.selected_state);
+    // console.log(req.params.selected_state);
     fs.readFile(path.join(template_dir, 'state.html'),'utf-8' ,(err, data) => {
         // modify `template` and send response
         // this will require a query to the SQL database
@@ -129,36 +129,39 @@ app.get('/state/:selected_state', (req, res) => {
             }
             else{
                 res.status(200).type('html');
-                let current_coal = 0;
-                let current_natural_gas = 0;
-                let current_nuclear_count = 0;
-                let current_petroleum_count = 0;
-                let current_renewable_count = 0;
+                let coal_array = [];
+                let natural_gas_array = [];
+                let nuclear_array = [];
+                let petroleum_array = [];
+                let renewable_array = [];
+                let year_total = [];
+                let years_array = [];
                 let state = req.params.selected_state;
-
                 for (let i = 0; i < rows.length; i++) {
-                    current_year = i;
-                    current_coal = rows[i].coal;
-                    current_natural_gas = rows[i].natural_gas;
-                    current_nuclear_count = rows[i].nuclear;
-                    current_petroleum_count = rows[i].petroleum;
-                    current_renewable_count = rows[i].renewable;
+                    var current_year = i + 1960;
+                    year_total.push(rows[i].coal + rows[i].natural_gas + rows[i].nuclear + rows[i].nuclear + rows[i].petroleum + rows[i].renewable);
+                    coal_array.push(rows[i].coal/year_total[i]);
+                    natural_gas_array.push(rows[i].natural_gas/year_total[i]);
+                    nuclear_array.push(rows[i].nuclear/year_total[i]);
+                    petroleum_array.push(rows[i].petroleum/year_total[i]);
+                    renewable_array.push(rows[i].renewable/year_total[i]);
+                    years_array.push(current_year);
                 }
-
-                let finalRes = data.replace('var coal_counts', 'var coal_counts = ' + current_coal);
-                finalRes = finalRes.replace('var natural_gas_counts', 'var natural_gas_counts = ' + current_natural_gas);
-                finalRes = finalRes.replace('var nuclear_counts', 'var nuclear_counts = ' + current_nuclear_count);
-                finalRes = finalRes.replace('var petroleum_counts', 'var petroleum_counts = ' + current_petroleum_count);
-                finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = ' + current_renewable_count);
+                finalRes = data.replace('var coal_counts', 'var coal_counts = [' + coal_array + ']');
+                finalRes = finalRes.replace('var natural_gas_counts', 'var natural_gas_counts = [' + natural_gas_array + ']');
+                finalRes = finalRes.replace('var nuclear_counts', 'var nuclear_counts = [' + nuclear_array + ']');
+                finalRes = finalRes.replace('var petroleum_counts', 'var petroleum_counts = [' + petroleum_array + ']');
+                finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = [' + renewable_array + ']');
+                finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
                 finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + '</h1>');
+                finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
 
                 for (let i = 0; i < rows.length; i++) {
                     for ([key, value] of Object.entries(rows[i])) {
-                        console.log(key, value);
+                        // console.log(key, value);
                         let current_year = 1960 + i;
-                        if(key == "year"){
-                            finalRes = finalRes.replace('Y'+current_year, value );
-                        }
+
+                        finalRes = finalRes.replace('T'+current_year, year_total[i] );
 
                         if(key == "coal"){
                             finalRes = finalRes.replace('C'+current_year, value );
@@ -177,16 +180,17 @@ app.get('/state/:selected_state', (req, res) => {
                         }
 
                         if(key == "renewable"){
-                            finalRes = finalRes.replace('T'+current_year, value );
+                            finalRes = finalRes.replace('R'+current_year, value );
                         }
                     }
                 }
+                // console.log(finalRes);
                 res.write(finalRes);
                 res.end();
             }
         });
     });
-})
+});
 
 // GET request handler for '/energy/*'
 app.get('/energy/:selected_energy_source', (req, res) => {
