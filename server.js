@@ -153,7 +153,7 @@ app.get('/state/:selected_state', (req, res) => {
                 finalRes = finalRes.replace('var petroleum_counts', 'var petroleum_counts = [' + petroleum_array + ']');
                 finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = [' + renewable_array + ']');
                 finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
-                finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + '</h1>');
+                finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + ' Energy Comsumption from 1960 to 2018</h1>');
                 finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
 
                 for (let i = 0; i < rows.length; i++) {
