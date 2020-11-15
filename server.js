@@ -117,24 +117,76 @@ app.get('/year/:selected_year', (req, res) => {
 // GET request handler for '/state/*'
 app.get('/state/:selected_state', (req, res) => {
     console.log(req.params.selected_state);
-    fs.readFile(path.join(template_dir, 'state.html'), (err, template) => {
+    fs.readFile(path.join(template_dir, 'state.html'),'utf-8' ,(err, data) => {
         // modify `template` and send response
         // this will require a query to the SQL database
         db.all("SELECT * FROM consumption WHERE state_abbreviation = ?", [req.params.selected_state], (err, rows) => {
-            //console.log(rows); // rows is an array with the result of the query
+            // console.log(rows); // rows is an array with the result of the query
             if(err){
                 res.status(404).type("plain");
                 res.write("Error executing SQL query");
                 res.end();
             }
             else{
-                res.status(200).type('html').send(rows);
-                console.log("success reading");
+                res.status(200).type('html');
+                let current_coal = 0;
+                let current_natural_gas = 0;
+                let current_nuclear_count = 0;
+                let current_petroleum_count = 0;
+                let current_renewable_count = 0;
+                let state = req.params.selected_state;
+
+                for (let i = 0; i < rows.length; i++) {
+                    current_year = i;
+                    current_coal = rows[i].coal;
+                    current_natural_gas = rows[i].natural_gas;
+                    current_nuclear_count = rows[i].nuclear;
+                    current_petroleum_count = rows[i].petroleum;
+                    current_renewable_count = rows[i].renewable;
+                }
+
+                let finalRes = data.replace('var coal_counts', 'var coal_counts = ' + current_coal);
+                finalRes = finalRes.replace('var natural_gas_counts', 'var natural_gas_counts = ' + current_natural_gas);
+                finalRes = finalRes.replace('var nuclear_counts', 'var nuclear_counts = ' + current_nuclear_count);
+                finalRes = finalRes.replace('var petroleum_counts', 'var petroleum_counts = ' + current_petroleum_count);
+                finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = ' + current_renewable_count);
+                finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + '</h1>');
+
+                for (let i = 0; i < rows.length; i++) {
+                    for ([key, value] of Object.entries(rows[i])) {
+                        console.log(key, value);
+                        let current_year = 1960 + i;
+                        if(key == "year"){
+                            finalRes = finalRes.replace('Y'+current_year, value );
+                        }
+
+                        if(key == "coal"){
+                            finalRes = finalRes.replace('C'+current_year, value );
+                        }
+
+                        if(key == "natural_gas"){
+                            finalRes = finalRes.replace('NA'+current_year, value );
+                        }
+
+                        if(key == "nuclear"){
+                            finalRes = finalRes.replace('NU'+current_year, value );
+                        }
+
+                        if(key == "petroleum"){
+                            finalRes = finalRes.replace('P'+current_year, value );
+                        }
+
+                        if(key == "renewable"){
+                            finalRes = finalRes.replace('T'+current_year, value );
+                        }
+                    }
+                }
+                res.write(finalRes);
                 res.end();
             }
         });
     });
-});
+})
 
 // GET request handler for '/energy/*'
 app.get('/energy/:selected_energy_source', (req, res) => {
