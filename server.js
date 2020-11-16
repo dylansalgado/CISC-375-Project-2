@@ -155,6 +155,7 @@ app.get('/state/:selected_state', (req, res) => {
                 finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
                 finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + ' Energy Comsumption from 1960 to 2018</h1>');
                 finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
+                finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + state + '.png" id="flag" />');
 
                 for (let i = 0; i < rows.length; i++) {
                     for ([key, value] of Object.entries(rows[i])) {
