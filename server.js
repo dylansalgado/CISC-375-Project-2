@@ -26,7 +26,6 @@ let db = new sqlite3.Database(db_filename, sqlite3.OPEN_READONLY, (err) => {
 
 app.use(express.static(public_dir)); // serve static files from 'public' directory
 
-
 // GET request handler for home page '/' (redirect to /year/2018)
 app.get('/', (req, res) => {
     res.redirect('/year/2018');
@@ -36,18 +35,24 @@ app.get('/', (req, res) => {
 app.get('/year/:selected_year', (req, res) => {
     console.log(req.params.selected_year);
     fs.readFile(path.join(template_dir, 'year.html'),'utf-8' ,(err, data) => {
-        // modify `template` and send response
+        // modify `template` and send finalRes
         // this will require a query to the SQL database
     
         db.all("SELECT * FROM Consumption WHERE year = ?", [req.params.selected_year], (err, rows) => {
             //console.log(rows); // rows is an array with the result of the query
             if(err){
-                res.status(404).type("plain");
+                res.status(404).type("txt");
                 res.write("Error executing SQL query");
                 res.end();
             }
+            else if(rows.length == 0){
+                //res.status(404).type("plain");
+                res.status(404).type("txt");
+                res.write("Error: no data for year " + req.params.selected_year);
+                res.end();
+            }
             else{
-                //console.log("success reading");
+                console.log("success reading sql queries");
                 res.status(200).type('html');
                 let total_coal = 0;
                 let total_natural_gas = 0;
@@ -197,10 +202,80 @@ app.get('/state/:selected_state', (req, res) => {
 app.get('/energy/:selected_energy_source', (req, res) => {
     console.log(req.params.selected_energy_source);
     fs.readFile(path.join(template_dir, 'energy.html'), (err, template) => {
-        // modify `template` and send response
-        // this will require a query to the SQL database
+        
 
-        res.status(200).type('html').send(energy); // <-- you may need to change this
+            let energyTypeSelected = '';
+            energyTypeSelected = req.params.selected_energy_source;
+            energyTypeSelected = energyTypeSelected.toString();
+            // modify `finalRes` here
+
+            let finalRes = template.toString().replace('var energy_type', 'var energy_type = ' +  "'" + energyTypeSelected + "'");
+
+            //populate header
+            finalRes = finalRes.replace('<h2>Consumption Snapshot</h2>', '<h2>' + energyTypeSelected + ' Consumption Snapshot</h2>');
+
+            // for each state, loop thru all years and get selected coal type
+            //object will have name:value PerformanceObserverEntryList, name is state_abbreviation value is array of energytype
+            db.all('SELECT * FROM Consumption ORDER BY state_abbreviation,year', (err, rows) => {
+                if(err){
+                    res.status(404).type("txt");
+                    res.write("Error executing SQL query");
+                    res.end();
+                }
+
+                else if(rows.length == 0){
+                    res.status(404).type("txt");
+                    res.write("Error: no data for energy " + req.params.selected_energy_source);
+                    res.end();
+                }
+
+                else{
+                    let key = '';
+                    let energyObject = {};
+
+                    let i = 0;
+                    while (i < rows.length) {
+                        const energyValue = [];
+                        key = rows[i].state_abbreviation;
+                        let curState = key;
+
+                        while (curState === key) {
+                            energyValue.push(rows[i][energyTypeSelected]);
+                            i++;
+                            if (i < rows.length) {
+                                curState = rows[i].state_abbreviation;
+                            } else {
+                                curState = '';
+                            }
+                        }
+                        energyObject[key] = energyValue;
+                    }
+
+                    finalRes = finalRes.replace('var energy_counts', 'var energy_counts = ' + JSON.stringify(energyObject));
+                    finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> ' + req.params.selected_energy_source  +'</h1>')
+
+                    let dataResult = '';
+                    let data = 0;
+                    i = 0;
+                    let j = 0;
+                    while (i < 59) {
+                        dataResult += '<tr><td>' + rows[i].year + '</td>';
+                        j = i;
+                        let k = 0;
+                        while (k < 51) {
+                            
+                            data = rows[j][energyTypeSelected];
+                            dataResult += '<td>' + data + '</td>';
+                            j += 59;
+                            k++;
+                        }
+                        i++;
+                    }
+                    finalRes = finalRes.replace('<td>{{DATA}}</td>', dataResult);
+                    res.write(finalRes);
+                    res.end();
+                }
+            });
     });
 });
 
