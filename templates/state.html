@@ -15,11 +15,18 @@
         var petroleum_counts;
         var renewable_counts;
         var years_array; // used in chart
+        var img;
     </script>
 </head>
 <body>
-    <h1> State </h1>
-    <img src="" id="image">
+    <h1> State </h1> 
+
+    <div id="image">
+        <img src="" id="flag" />    
+    </div>
+    
+    <h1> Data Table </h1>
+
     <table id="table">
         <thead>
             <tr>
@@ -585,35 +592,40 @@
                         borderColor: 'rgb(0, 0, 0)',
                         backgroundColor: 'rgb(0, 0, 0)',
                         data: coal_counts,
-                        pointRadius: 1
+                        pointRadius: 1,
+                        pointHitRadius: 20
                     },
                     {
                         label: 'Natural Gas',
                         borderColor: 'rgb(0, 0, 255)',
                         backgroundColor: 'rgb(0, 0, 255)',
                         data: natural_gas_counts,
-                        pointRadius: 1                    
+                        pointRadius: 1,
+                        pointHitRadius: 20                    
                     },
                     {
                         label: 'Nuclear',
                         borderColor: 'rgb(0, 255, 0)',
                         backgroundColor: 'rgb(0, 255, 0)',
                         data: nuclear_counts,
-                        pointRadius: 1
+                        pointRadius: 1,
+                        pointHitRadius: 20
                     },
                     {
                         label: 'Petroleum',
                         borderColor: 'rgb(192, 0, 0)',
                         backgroundColor: 'rgb(192, 0, 0)',
                         data: petroleum_counts,
-                        pointRadius: 1
+                        pointRadius: 1,
+                        pointHitRadius: 20
                     },
                     {
                         label: 'Renewable',
                         borderColor: 'rgb(128, 64, 0)',
                         backgroundColor: 'rgb(128, 64, 0)',
                         data: renewable_counts,
-                        pointRadius: 1
+                        pointRadius: 1,
+                        pointHitRadius: 20
                     },
                     {
                         label: 'Other'
