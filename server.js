@@ -252,8 +252,17 @@ app.get('/energy/:selected_energy_source', (req, res) => {
                     }
 
                     finalRes = finalRes.replace('var energy_counts', 'var energy_counts = ' + JSON.stringify(energyObject));
-                    finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> ' + req.params.selected_energy_source  +'</h1>')
-
+                    if (req.params.selected_energy_source === 'coal') {
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Coal</h1>');
+                    } else if (req.params.selected_energy_source === 'natural_gas') {
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Natural Gas</h1>');
+                    } else if (req.params.selected_energy_source === 'nuclear') {
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Nuclear</h1>');
+                    } else if (req.params.selected_energy_source === 'petroleum') {
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Petroleum</h1>');
+                    } else {
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable</h1>');
+                    }
                     let dataResult = '';
                     let data = 0;
                     i = 0;
