@@ -210,6 +210,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
             // modify `finalRes` here
 
             let finalRes = template.toString().replace('var energy_type', 'var energy_type = ' +  "'" + energyTypeSelected + "'");
+            
 
             //populate header
             finalRes = finalRes.replace('<h2>Consumption Snapshot</h2>', '<h2>' + energyTypeSelected + ' Consumption Snapshot</h2>');
@@ -263,6 +264,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
                     } else {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable</h1>');
                     }
+                    finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + req.params.selected_energy_source + '.png" id="flag" />');
                     let dataResult = '';
                     let data = 0;
                     i = 0;
