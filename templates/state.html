@@ -21,7 +21,7 @@
 </head>
 <body id="borderbox" onload="init()">
     <h1> State </h1>
-    <img src="" id="image">
+    
 
     <label>View Data By: </label>
         <br/>
@@ -166,6 +166,7 @@
         <button id="previousState" type="button" value="A">Previous</button>
         <button id="nextState" type="button" value="B">Next</button>
     </div>
+    <img src="" id="flag" alt="flag"/>
     <script>
         document.getElementById("previousState").value = state;
         document.getElementById("nextState").value = state;
@@ -177,7 +178,6 @@
             document.getElementById("nextState").disabled = true;
         }
     </script>
-    <img src="" id="flag" />
     <table id="table">
         <thead>
             <tr>
