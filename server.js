@@ -223,6 +223,7 @@ app.get('/state/:selected_state', (req, res) => {
                 finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = [' + renewable_array + ']');
                 finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
                 finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
+                finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + state + '.png" id="flag" />');
 
                 for ([key, value] of Object.entries(stateName)) {
                     if(state == key){
