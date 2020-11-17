@@ -223,7 +223,7 @@ app.get('/state/:selected_state', (req, res) => {
                 finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = [' + renewable_array + ']');
                 finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
                 finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
-                finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + state + '.png" id="flag" />');
+                finalRes = finalRes.replace('<img src="" id="flag" alt="flag"/>', '<img src="../images/' + state + '.png" id="flag" alt="' + state +' flag" class="center"/>');
 
                 for ([key, value] of Object.entries(stateName)) {
                     if(state == key){
@@ -327,7 +327,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
                     } else {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable Yearly Energy Consumption For Each State</h1>');
                     }
-                    finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + req.params.selected_energy_source + '.png" id="flag" />');
+                    finalRes = finalRes.replace('<img src="" id="flag" alt="energy"/> ', '<img src="../images/' + req.params.selected_energy_source + '.png" id="flag" alt="' + energyTypeSelected +'" class="center"/>');
                     let dataResult = '';
                     let data = 0;
                     i = 0;
