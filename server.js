@@ -268,7 +268,6 @@ app.get('/state/:selected_state', (req, res) => {
     });
 });
 
-
 // GET request handler for '/energy/*'
 app.get('/energy/:selected_energy_source', (req, res) => {
     console.log(req.params.selected_energy_source);
@@ -276,7 +275,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
             let energyTypeSelected = '';
             energyTypeSelected = req.params.selected_energy_source;
             energyTypeSelected = energyTypeSelected.toString();
-
+            let validEntries = ['coal', 'natural_gas','nuclear','petroleum','renewable'];
             let finalRes = template.toString().replace('var energy_type', 'var energy_type = ' +  "'" + energyTypeSelected + "'");
             
 
@@ -287,7 +286,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
                     res.end();
                 }
 
-                else if(rows.length == 0){
+                else if(validEntries.indexOf(energyTypeSelected) < 0){
                     res.status(404).type("txt");
                     res.write("Error: no data for energy " + req.params.selected_energy_source);
                     res.end();
@@ -352,6 +351,7 @@ app.get('/energy/:selected_energy_source', (req, res) => {
             });
     });
 });
+
 
 app.listen(port, () => {
     console.log('Now listening on port ' + port);
