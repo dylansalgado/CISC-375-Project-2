@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html id="top">
+<html>
 <head>
+    <link rel="stylesheet" href="/css/style.css"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>US Energy Consumption</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="application/javascript">
+    <title>US Energy Consumption By State</title>
+    <script type="application/javascript" id="variables">
         // `state` and arrays of consumption per year => set these variables equal to appropriate value
         //   * these variables will be defined and accessible from any script loaded after this one
         var state;
+        var stateFull;
         var coal_counts;  // e.g. [1234, 2567, ...]
         var natural_gas_counts;
         var nuclear_counts;
         var petroleum_counts;
         var renewable_counts;
         var years_array; // used in chart
-        var img;
     </script>
-    <script type="application/javascript" src="/scripts/navigate.js" async></script>
+    <script type="application/javascript" src="/scripts/navigateState.js" async></script>
 </head>
 <body id="borderbox" onload="init()">
     <h1> State </h1>
-    
+    <img src="" id="image">
+
     <label>View Data By: </label>
         <br/>
 
@@ -152,25 +153,30 @@
 
         <select id="energySelect" name="" style='display:none' onchange='energyChanged(this.value)'>
             <option disabled selected value="select">  -- select energy -- </option>
-            <option value="coal">Coal</option>
-            <option value="natural">Natural Gas</option>
-            <option value="nuclear">Nuclear</option>
-            <option value="petroleum">Petroleum</option>
-            <option value="renewable">Renewable</option>
+            <option value="coal">coal</option>
+            <option value="natural_gas">natural gas</option>
+            <option value="nuclear">nuclear</option>
+            <option value="petroleum">petroleum</option>
+            <option value="renewable">renewable</option>
         </select>
 
         
     <div class="topnav">
         <button id="home" type="button" value="A">Home</button>
-        <button id="previous" type="button" value="A">Previous</button>
-        <button id="next" type="button" value="B">Next</button>
+        <button id="previousState" type="button" value="A">Previous</button>
+        <button id="nextState" type="button" value="B">Next</button>
     </div>
-    <div id="image">
-        <img src="" id="flag" />    
-    </div>
-    
-    <h1> Data Table </h1>
+    <script>
+        document.getElementById("previousState").value = state;
+        document.getElementById("nextState").value = state;
 
+        if (state == 'AK'){
+            document.getElementById("previousState").disabled = true;
+        }
+        if (state == 'WY'){
+            document.getElementById("nextState").disabled = true;
+        }
+    </script>
     <table id="table">
         <thead>
             <tr>
@@ -736,40 +742,35 @@
                         borderColor: 'rgb(0, 0, 0)',
                         backgroundColor: 'rgb(0, 0, 0)',
                         data: coal_counts,
-                        pointRadius: 1,
-                        pointHitRadius: 20
+                        pointRadius: 1
                     },
                     {
                         label: 'Natural Gas',
                         borderColor: 'rgb(0, 0, 255)',
                         backgroundColor: 'rgb(0, 0, 255)',
                         data: natural_gas_counts,
-                        pointRadius: 1,
-                        pointHitRadius: 20                    
+                        pointRadius: 1                    
                     },
                     {
                         label: 'Nuclear',
                         borderColor: 'rgb(0, 255, 0)',
                         backgroundColor: 'rgb(0, 255, 0)',
                         data: nuclear_counts,
-                        pointRadius: 1,
-                        pointHitRadius: 20
+                        pointRadius: 1
                     },
                     {
                         label: 'Petroleum',
                         borderColor: 'rgb(192, 0, 0)',
                         backgroundColor: 'rgb(192, 0, 0)',
                         data: petroleum_counts,
-                        pointRadius: 1,
-                        pointHitRadius: 20
+                        pointRadius: 1
                     },
                     {
                         label: 'Renewable',
                         borderColor: 'rgb(128, 64, 0)',
                         backgroundColor: 'rgb(128, 64, 0)',
                         data: renewable_counts,
-                        pointRadius: 1,
-                        pointHitRadius: 20
+                        pointRadius: 1
                     },
                     {
                         label: 'Other'
