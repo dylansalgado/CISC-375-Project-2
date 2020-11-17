@@ -344,3 +344,4 @@ app.get('/energy/:selected_energy_source', (req, res) => {
 app.listen(port, () => {
     console.log('Now listening on port ' + port);
 });
+
