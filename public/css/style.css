@@ -1,4 +1,13 @@
-/* hi */
+
+.outer {position:relative}
+.inner {
+  overflow-x:scroll;
+  overflow-y:visible;
+  width:500px; 
+  margin-left:400px;
+}
+
+
 .chart-container {
   width: 100%; 
   height:100%;
@@ -54,14 +63,14 @@ h3 {
 
 table { 
     /* table-layout:fixed; */
-    table-layout: fixed;
+    /* table-layout: fixed; */
     width: 100%;
     font: 1rem ;
     min-width: 250px;
 }
 
 th {
-    color:red;
+    color:rgb(255, 255, 255);
     background-color: rgb(10, 196, 196)
     
    
@@ -69,9 +78,9 @@ th {
 
 td {
     color: #133a06;
-    overflow: hidden; 
+    /* overflow: hidden; 
     text-overflow: ellipsis; 
-    word-wrap: break-word;
+    word-wrap: break-word; */
     background-color: rgb(255, 255, 255)
 }
 
