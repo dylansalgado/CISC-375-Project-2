@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>US Energy Consumption By Energy Type</title>
+    <title>US Energy Consumption</title>
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/javascript">
         // `energy_type` and object of consumption per year per state => set these variables equal to appropriate value
@@ -53,6 +53,7 @@
             <option value="1981">1981</option>
             <option value="1982">1982</option>
             <option value="1983">1983</option>
+            <option value="1984">1984</option>
             <option value="1984">1984</option>
             <option value="1985">1985</option>
             <option value="1986">1986</option>
@@ -147,11 +148,11 @@
 
         <select id="energySelect" name="" style='display:none' onchange='energyChanged(this.value)'>
             <option disabled selected value="select">  -- select energy -- </option>
-            <option value="coal">Coal</option>
-            <option value="natural_gas">Natural Gas</option>
-            <option value="nuclear">Nuclear</option>
-            <option value="petroleum">Petroleum</option>
-            <option value="renewable">Renewable</option>
+            <option value="coal">coal</option>
+            <option value="natural_gas">natural gas</option>
+            <option value="nuclear">nuclear</option>
+            <option value="petroleum">petroleum</option>
+            <option value="renewable">renewable</option>
         </select>
 
         
@@ -236,499 +237,499 @@
         </div>
     <br/>
 <br/>
+<h1> Percent of Total Consumption by Energy Type </h1>
 <br/>
-    <div id = "example2" class="chart-container" >
-        <canvas id="myChart"></canvas>
-    </div>
-    <script>
-        var states = Object.keys(energy_counts);
-        var energies = Object.values(energy_counts);
-        var years_array = [];
-        for (var i = 1960; i < 2019; i++) {
-            years_array.push(i);
-        }
-    </script>
+<div id = "example2" class="chart-container" >
     <canvas id="myChart"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script>
-        // console.log(energy[0]);
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myLineChart = new Chart(ctx, {
-            responsice: true,
-            type: 'line',
-            data: {
-                labels: years_array,
-                datasets: [
-                    {
-                        label: states[0],
-                        data: energies[0],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[1],
-                        data: energies[1],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[2],
-                        data: energies[2],
-                        fill: false,
-                        borderColor: 'Brown',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[3],
-                        data: energies[3],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[4],
-                        data: energies[4],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[5],
-                        data: energies[5],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[6],
-                        data: energies[6],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[7],
-                        data: energies[7],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[8],
-                        data: energies[8],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[9],
-                        data: energies[9],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[10],
-                        data: energies[10],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[11],
-                        data: energies[11],
-                        fill: false,
-                        borderColor: 'Brown',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[12],
-                        data: energies[12],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[13],
-                        data: energies[13],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[14],
-                        data: energies[14],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[15],
-                        data: energies[15],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[16],
-                        data: energies[16],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[17],
-                        data: energies[17],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[18],
-                        data: energies[18],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[19],
-                        data: energies[19],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[20],
-                        data: energies[20],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[21],
-                        data: energies[21],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[22],
-                        data: energies[22],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[23],
-                        data: energies[23],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[24],
-                        data: energies[24],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[25],
-                        data: energies[25],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[26],
-                        data: energies[26],
-                        fill: false,
-                        borderColor: 'Brown',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[27],
-                        data: energies[27],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[28],
-                        data: energies[28],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[29],
-                        data: energies[29],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[31],
-                        data: energies[31],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[32],
-                        data: energies[32],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[33],
-                        data: energies[33],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[34],
-                        data: energies[34],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[35],
-                        data: energies[35],
-                        fill: false,
-                        borderColor: 'Brown',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[36],
-                        data: energies[36],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[37],
-                        data: energies[37],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[38],
-                        data: energies[38],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[39],
-                        data: energies[39],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[40],
-                        data: energies[40],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[41],
-                        data: energies[41],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[42],
-                        data: energies[42],
-                        fill: false,
-                        borderColor: 'Black',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[43],
-                        data: energies[43],
-                        fill: false,
-                        borderColor: 'Brown',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[44],
-                        data: energies[44],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[45],
-                        data: energies[45],
-                        fill: false,
-                        borderColor: 'Orange',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[46],
-                        data: energies[46],
-                        fill: false,
-                        borderColor: 'Gray',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[0],
-                        data: energies[0],
-                        fill: false,
-                        borderColor: 'Green',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[47],
-                        data: energies[47],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[48],
-                        data: energies[48],
-                        fill: false,
-                        borderColor: 'Purple',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[49],
-                        data: energies[49],
-                        fill: false,
-                        borderColor: 'Red',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    },
-                    {
-                        label: states[50],
-                        data: energies[50],
-                        fill: false,
-                        borderColor: 'Blue',
-                        pointHitRadius: 30,
-                        pointRadius: 0.1,
-                        borderWidth: 1
-                    }
-                ],
-                options: {
-                    
+</div>
+<script>
+    var states = Object.keys(energy_counts);
+    var energies = Object.values(energy_counts);
+    var years_array = [];
+    for (var i = 1960; i < 2019; i++) {
+        years_array.push(i);
+    }
+</script>
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    // console.log(energy[0]);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        responsice: true,
+        type: 'line',
+        data: {
+            labels: years_array,
+            datasets: [
+                {
+                    label: states[0],
+                    data: energies[0],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[1],
+                    data: energies[1],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[2],
+                    data: energies[2],
+                    fill: false,
+                    borderColor: 'Brown',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[3],
+                    data: energies[3],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[4],
+                    data: energies[4],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[5],
+                    data: energies[5],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[6],
+                    data: energies[6],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[7],
+                    data: energies[7],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[8],
+                    data: energies[8],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[9],
+                    data: energies[9],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[10],
+                    data: energies[10],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[11],
+                    data: energies[11],
+                    fill: false,
+                    borderColor: 'Brown',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[12],
+                    data: energies[12],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[13],
+                    data: energies[13],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[14],
+                    data: energies[14],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[15],
+                    data: energies[15],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[16],
+                    data: energies[16],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[17],
+                    data: energies[17],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[18],
+                    data: energies[18],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[19],
+                    data: energies[19],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[20],
+                    data: energies[20],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[21],
+                    data: energies[21],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[22],
+                    data: energies[22],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[23],
+                    data: energies[23],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[24],
+                    data: energies[24],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[25],
+                    data: energies[25],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[26],
+                    data: energies[26],
+                    fill: false,
+                    borderColor: 'Brown',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[27],
+                    data: energies[27],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[28],
+                    data: energies[28],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[29],
+                    data: energies[29],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[31],
+                    data: energies[31],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[32],
+                    data: energies[32],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[33],
+                    data: energies[33],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[34],
+                    data: energies[34],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[35],
+                    data: energies[35],
+                    fill: false,
+                    borderColor: 'Brown',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[36],
+                    data: energies[36],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[37],
+                    data: energies[37],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[38],
+                    data: energies[38],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[39],
+                    data: energies[39],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[40],
+                    data: energies[40],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[41],
+                    data: energies[41],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[42],
+                    data: energies[42],
+                    fill: false,
+                    borderColor: 'Black',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[43],
+                    data: energies[43],
+                    fill: false,
+                    borderColor: 'Brown',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[44],
+                    data: energies[44],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[45],
+                    data: energies[45],
+                    fill: false,
+                    borderColor: 'Orange',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[46],
+                    data: energies[46],
+                    fill: false,
+                    borderColor: 'Gray',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[0],
+                    data: energies[0],
+                    fill: false,
+                    borderColor: 'Green',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[47],
+                    data: energies[47],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[48],
+                    data: energies[48],
+                    fill: false,
+                    borderColor: 'Purple',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[49],
+                    data: energies[49],
+                    fill: false,
+                    borderColor: 'Red',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
+                },
+                {
+                    label: states[50],
+                    data: energies[50],
+                    fill: false,
+                    borderColor: 'Blue',
+                    pointHitRadius: 30,
+                    pointRadius: 0.1,
+                    borderWidth: 1
                 }
+            ],
+            options: {
+                
             }
-        });
-    </script>
+        }
+    });
+</script>
 <br/>
 <h2>
     <a href="#top">Jump to top of page</a>
 </h2>
 </body>
 </html>
-
