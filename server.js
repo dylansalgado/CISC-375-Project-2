@@ -74,7 +74,7 @@ app.get('/year/:selected_year', (req, res) => {
                 finalRes = finalRes.replace('var petroleum_count', 'var petroleum_count = ' + total_petroleum_count);
                 finalRes = finalRes.replace('var renewable_count', 'var renewable_count = ' + total_renewable_count);
                 finalRes = finalRes.replace('var year', 'var year = ' + year);
-                finalRes = finalRes.replace('<h1> year </h1>', '<h1>' + year + '</h1>');
+                finalRes = finalRes.replace('<h1> year </h1>', '<h1>' + year + ' Energy Consumption in the U.S.'+ '</h1>');
 
                 for (let i = 0; i < rows.length; i++) {
                     var count = 0;
@@ -128,8 +128,14 @@ app.get('/state/:selected_state', (req, res) => {
         db.all("SELECT * FROM consumption WHERE state_abbreviation = ?", [req.params.selected_state], (err, rows) => {
             // console.log(rows); // rows is an array with the result of the query
             if(err){
-                res.status(404).type("plain");
+                res.status(404).type("txt");
                 res.write("Error executing SQL query");
+                res.end();
+            }
+            else if(rows.length == 0){
+                //res.status(404).type("plain");
+                res.status(404).type("txt");
+                res.write("Error: no data for State " + req.params.selected_state);
                 res.end();
             }
             else{
@@ -142,6 +148,64 @@ app.get('/state/:selected_state', (req, res) => {
                 let year_total = [];
                 let years_array = [];
                 let state = req.params.selected_state;
+
+            let stateName = {
+                        "AL":'Alabama',
+                        "AK":'Alaska',
+                        "AZ":'Arizona',
+                        "AR":'Arkansas',
+                        "CA":'California',
+                        "CO":'Colorado',
+                        "CT":'Connecticut',
+                        "DE":'Delaware',
+                        "DC":'District Of Columbia',
+                        "FL":'Florida',
+                        "GA":'Georgia',
+                        "HI":'Hawaii',
+                        "ID":'Idaho',
+                        "IL":'Illinois',
+                        "IN":'Indiana',
+                        "IA":'Iowa',
+                        "KS":'Kansas',
+                        "KY":'Kentucky',
+                        "LA":'Louisiana',
+                        "ME":'Maine',
+                        "MD":'Maryland',
+                        "MA":'Massachusetts',
+                        "MI":'Michigan',
+                        "MN":'Minnesota',
+                        "MS":'Mississippi',
+                        "MO":'Missouri',
+                        "MT":'Montana',
+                        "NE":'Nebraska',
+                        "NV":'Nevada',
+                        "NH":'New Hampshire',
+                        "NJ":'New Jersey',
+                        "NM":'New Mexico',
+                        "NY":'New York',
+                        "NC":'North Carolina',
+                        "ND":'North Dakota',
+                        "OH":'Ohio',
+                        "OK":'Oklahoma',
+                        "OR":'Oregon',
+                        "PA":'Pennsylvania',
+                        "RI":'Rhode Island',
+                        "SC":'South Carolina',
+                        "SD":'South Dakota',
+                        "TN":'Tennessee',
+                        "TX":'Texas',
+                        "UT":'Utah',
+                        "VT":'Vermont',
+                        "VA":'Virginia',
+                        "WA":'Washington',
+                        "WV":'West Virginia',
+                        "WI":'Wisconsin',
+                        "WY":'Wyoming'
+            }
+
+
+
+
                 for (let i = 0; i < rows.length; i++) {
                     var current_year = i + 1960;
                     year_total.push(rows[i].coal + rows[i].natural_gas + rows[i].nuclear + rows[i].nuclear + rows[i].petroleum + rows[i].renewable);
@@ -158,9 +222,14 @@ app.get('/state/:selected_state', (req, res) => {
                 finalRes = finalRes.replace('var petroleum_counts', 'var petroleum_counts = [' + petroleum_array + ']');
                 finalRes = finalRes.replace('var renewable_counts', 'var renewable_counts = [' + renewable_array + ']');
                 finalRes = finalRes.replace('var years_array', 'var years_array = [' + years_array + ']');
-                finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + state + ' Energy Comsumption from 1960 to 2018</h1>');
                 finalRes = finalRes.replace("var state", 'var state = ' + '"' + state + '"');
-                finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + state + '.png" id="flag" />');
+
+                for ([key, value] of Object.entries(stateName)) {
+                    if(state == key){
+                        finalRes = finalRes.replace("var stateFull", 'var stateFull = ' + '"' + value + '"');
+                        finalRes = finalRes.replace('<h1> State </h1>', '<h1>' + value + ' Energy Consumption from 1960 to 2018</h1>');
+                    }
+                }
 
                 for (let i = 0; i < rows.length; i++) {
                     for ([key, value] of Object.entries(rows[i])) {
@@ -198,25 +267,18 @@ app.get('/state/:selected_state', (req, res) => {
     });
 });
 
+
 // GET request handler for '/energy/*'
 app.get('/energy/:selected_energy_source', (req, res) => {
     console.log(req.params.selected_energy_source);
     fs.readFile(path.join(template_dir, 'energy.html'), (err, template) => {
-        
-
             let energyTypeSelected = '';
             energyTypeSelected = req.params.selected_energy_source;
             energyTypeSelected = energyTypeSelected.toString();
-            // modify `finalRes` here
 
             let finalRes = template.toString().replace('var energy_type', 'var energy_type = ' +  "'" + energyTypeSelected + "'");
             
 
-            //populate header
-            finalRes = finalRes.replace('<h2>Consumption Snapshot</h2>', '<h2>' + energyTypeSelected + ' Consumption Snapshot</h2>');
-
-            // for each state, loop thru all years and get selected coal type
-            //object will have name:value PerformanceObserverEntryList, name is state_abbreviation value is array of energytype
             db.all('SELECT * FROM Consumption ORDER BY state_abbreviation,year', (err, rows) => {
                 if(err){
                     res.status(404).type("txt");
@@ -254,15 +316,15 @@ app.get('/energy/:selected_energy_source', (req, res) => {
 
                     finalRes = finalRes.replace('var energy_counts', 'var energy_counts = ' + JSON.stringify(energyObject));
                     if (req.params.selected_energy_source === 'coal') {
-                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Coal</h1>');
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Coal Yearly Energy Consumption For Each State</h1>');
                     } else if (req.params.selected_energy_source === 'natural_gas') {
-                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Natural Gas</h1>');
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Natural Gas Yearly Energy Consumption For Each State</h1>');
                     } else if (req.params.selected_energy_source === 'nuclear') {
-                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Nuclear</h1>');
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Nuclear Yearly Energy Consumption For Each State</h1>');
                     } else if (req.params.selected_energy_source === 'petroleum') {
-                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Petroleum</h1>');
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Petroleum Yearly Energy Consumption For Each State</h1>');
                     } else {
-                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable</h1>');
+                        finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable Yearly Energy Consumption For Each State</h1>');
                     }
                     finalRes = finalRes.replace('<img src="" id="flag" />', '<img src="../images/' + req.params.selected_energy_source + '.png" id="flag" />');
                     let dataResult = '';
@@ -293,3 +355,4 @@ app.get('/energy/:selected_energy_source', (req, res) => {
 app.listen(port, () => {
     console.log('Now listening on port ' + port);
 });
+
