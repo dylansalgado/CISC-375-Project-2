@@ -21,6 +21,7 @@ p {
    /* background-color: rgb(255, 255, 255)*/
     width: 100%;        /* normally 30% of containing element */
     min-width: 250px;  /* can’t be smaller than 200px though */
+    text-align: center;
 }
 
 /* The anchor color for paragraph is set */
