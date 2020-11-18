@@ -317,14 +317,19 @@ app.get('/energy/:selected_energy_source', (req, res) => {
                     finalRes = finalRes.replace('var energy_counts', 'var energy_counts = ' + JSON.stringify(energyObject));
                     if (req.params.selected_energy_source === 'coal') {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Coal Yearly Energy Consumption For Each State</h1>');
+                        finalRes = finalRes.replace('<p> SourceHere </p>', '<p> Image from The Fiji Times </p>');
                     } else if (req.params.selected_energy_source === 'natural_gas') {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Natural Gas Yearly Energy Consumption For Each State</h1>');
+                        finalRes = finalRes.replace('<p> SourceHere </p>', '<p> Image from SUMINISTROS ENERGÉTICOS DE PUEBLA Y EL SURESTE </p>');
                     } else if (req.params.selected_energy_source === 'nuclear') {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Nuclear Yearly Energy Consumption For Each State</h1>');
+                        finalRes = finalRes.replace('<p> SourceHere </p>', '<p> Image from Ascension Technologies </p>');
                     } else if (req.params.selected_energy_source === 'petroleum') {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Petroleum Yearly Energy Consumption For Each State</h1>');
+                        finalRes = finalRes.replace('<p> SourceHere </p>', '<p> Image from Investopedia </p>');
                     } else {
                         finalRes = finalRes.replace('<h1> energy_type </h1>', '<h1> Renewable Yearly Energy Consumption For Each State</h1>');
+                        finalRes = finalRes.replace('<p> SourceHere </p>', '<p> Image from MYRA Investments </p>');
                     }
                     finalRes = finalRes.replace('<img src="" id="flag" alt="energy"/> ', '<img src="../images/' + req.params.selected_energy_source + '.png" id="flag" alt="' + energyTypeSelected +'" class="center"/>');
                     let dataResult = '';
