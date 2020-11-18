@@ -23,7 +23,7 @@
     "main": "server.js",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/dylansalgado/CISC-375-Project-2"
     },
     "dependencies": {
         "express": "^4.17.1",
